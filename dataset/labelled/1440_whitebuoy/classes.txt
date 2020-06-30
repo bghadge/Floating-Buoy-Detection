@@ -1,0 +1,8 @@
+Red_Cylindrical_Buoy
+Green_Cylindrical_Buoy
+White_Cylindrical_Buoy
+Blue_Cylindrical_Buoy
+Marker_Buoy
+Black_Obstacle_Buoy
+Dock
+Background
