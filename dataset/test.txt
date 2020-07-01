@@ -1,0 +1,16 @@
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000080.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000081.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000082.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000083.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000084.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000085.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000086.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000087.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000088.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000089.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000090.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000091.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000092.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000093.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000094.png
+/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/buoy_000095.png
