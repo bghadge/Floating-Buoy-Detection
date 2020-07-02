@@ -6,13 +6,15 @@ import pandas as pd
 import numpy as np
 from torch.utils.data import Dataset
 from torchvision import transforms
+from PIL import Image
+
 
 class CustomDataset(Dataset):
     """
         Create a custom dataset from a txt file that contains names of images.
     """
 
-    def __init__(self, txt_file, dataset_dir, transform=None):
+    def __init__(self, txt_file_path, dataset_dir, transform=None):
         """
         Args:
             txt_file (string): Path to the train/val/test txt file.
@@ -21,7 +23,7 @@ class CustomDataset(Dataset):
                 on a sample.
         """
         # self.landmarks_frame = pd.read_csv(csv_file)
-        self.image_names = pd.read_table(txt_file, sep="\n", header=None)
+        self.image_names = pd.read_table(txt_file_path, sep="\n", header=None)
         self.dataset_dir = dataset_dir
         self.transform = transform
 
@@ -45,6 +47,10 @@ class CustomDataset(Dataset):
         sample = {'image': image, 'bboxes': img_info}
 
         if self.transform:
-            sample = self.transform(sample)
+            toPIL = transforms.ToPILImage()
+            toTensor = transforms.ToTensor()
+            sample['image'] = toPIL(sample['image'])
+            sample['image'] = self.transform(sample['image'])
+            sample['bboxes'] = toTensor(sample['bboxes'])
 
         return sample

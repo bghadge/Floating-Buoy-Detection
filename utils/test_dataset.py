@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from torchvision import transforms
 
 from dataset import CustomDataset
 from dataset_functions import show_image_with_bboxes
@@ -6,7 +7,11 @@ from dataset_functions import show_image_with_bboxes
 txt = "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/train.txt"
 data = "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/1440_whitebuoy/"
 
-train_dataset = CustomDataset(txt, data)
+trans = transforms.Compose([
+                            transforms.Resize((320, 224)),
+                            transforms.ToTensor(),
+                            ])
+train_dataset = CustomDataset(txt, data, trans)
 
 fig = plt.figure()
 
@@ -19,8 +24,10 @@ for i in range(len(train_dataset)):
     plt.tight_layout()
     ax.set_title('Sample #{}'.format(i))
     ax.axis('off')
+
     image = sample['image']
     bboxes = sample['bboxes']
+
     show_image_with_bboxes(image, bboxes)
 
     if i == 3:
