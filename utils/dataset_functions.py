@@ -54,15 +54,8 @@ def show_image_batch_with_bboxes(tensor_img, bboxes):
     """ Displays image with bounding boxes"""
     """
     Args:
-        img (np.array): np.array of the image.
-        bboxes (np.array): np.array with each row is in yolo format
-                            [label, x, y, width, height]
-                            where
-                            label = integer representing a class
-                            x = x/width of the image
-                            y = y/height of the image
-                            width = width of bbox/width of the image,
-                            height = height of bbox/height of the image
+        img (torch.tensor):     Batch x C x H x W np.array of the image.
+        bboxes (torch.tensor):  Batch x 1 x no of boxes x 5
     """
     if torch.is_tensor(tensor_img):
         chw_img = tensor_img.numpy()

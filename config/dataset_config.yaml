@@ -1,0 +1,28 @@
+dataset_dir = ""
+train = ""
+val = ""
+test = ""
+
+mean = []
+std = []
+
+reshape_size = (400,600)
+
+class_to_idx = {'Red_Cylindrical_Buoy' : 0,
+                'Green_Cylindrical_Buoy' : 1,
+                'White_Cylindrical_Buoy' : 2,
+                'Blue_Cylindrical_Buoy' : 3,
+                'Marker_Buoy' : 4,
+                'Black_Obstacle_Buoy' : 5,
+                'Dock' : 6,
+                'Background' : 7
+               }
+idx_to_class = {0 : 'Red_Cylindrical_Buoy',
+                1 : 'Green_Cylindrical_Buoy',
+                2 : 'White_Cylindrical_Buoy',
+                3 : 'Blue_Cylindrical_Buoy',
+                4 : 'Marker_Buoy',
+                5 : 'Black_Obstacle_Buoy',
+                6 : 'Dock',
+                7 : 'Background'
+               }

@@ -15,21 +15,29 @@ train_dataset = CustomDataset(txt, data, trans)
 
 fig = plt.figure()
 
-for i in range(len(train_dataset)):
-    sample = train_dataset[i]
+sample = train_dataset[1]
+image = sample['image']
+bboxes = sample['bboxes']
 
-    print(i, sample['image'].shape, sample['bboxes'].shape)
+show_image_with_bboxes(image, bboxes)
 
-    ax = plt.subplot(1, 4, i + 1)
-    plt.tight_layout()
-    ax.set_title('Sample #{}'.format(i))
-    ax.axis('off')
+plt.show()
 
-    image = sample['image']
-    bboxes = sample['bboxes']
+# for i in range(len(train_dataset)):
+#     sample = train_dataset[i]
 
-    show_image_with_bboxes(image, bboxes)
+#     print(i, sample['image'].shape, sample['bboxes'].shape)
 
-    if i == 3:
-        plt.show()
-        break
+#     ax = plt.subplot(1, 4, i + 1)
+#     plt.tight_layout()
+#     ax.set_title('Sample #{}'.format(i))
+#     ax.axis('off')
+
+#     image = sample['image']
+#     bboxes = sample['bboxes']
+
+#     show_image_with_bboxes(image, bboxes)
+
+#     if i == 1:
+#         plt.show()
+        # break
