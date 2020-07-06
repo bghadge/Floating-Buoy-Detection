@@ -14,7 +14,6 @@ buoy_000012.png
 buoy_000013.png
 buoy_000014.png
 buoy_000015.png
-buoy_000016.png
 buoy_000017.png
 buoy_000018.png
 buoy_000019.png
@@ -27,7 +26,6 @@ buoy_000025.png
 buoy_000026.png
 buoy_000027.png
 buoy_000028.png
-buoy_000029.png
 buoy_000030.png
 buoy_000031.png
 buoy_000032.png
@@ -38,7 +36,6 @@ buoy_000036.png
 buoy_000037.png
 buoy_000038.png
 buoy_000039.png
-buoy_000040.png
 buoy_000041.png
 buoy_000042.png
 buoy_000043.png
@@ -54,7 +51,6 @@ buoy_000052.png
 buoy_000053.png
 buoy_000054.png
 buoy_000055.png
-buoy_000056.png
 buoy_000057.png
 buoy_000058.png
 buoy_000059.png

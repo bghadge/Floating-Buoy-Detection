@@ -1,14 +1,14 @@
-dataset_dir = ""
-train = ""
-val = ""
-test = ""
+data_dir : "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/1440_whitebuoy/"
+train : "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/train.txt"
+val : "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/val.txt"
+test : "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/test.txt"
 
-mean = []
-std = []
+mean : [0.1712, 0.2708, 0.3121]
+std : [0.1671, 0.2437, 0.2721]
 
-reshape_size = (400,600)
+reshape_size : [600,400]
 
-class_to_idx = {'Red_Cylindrical_Buoy' : 0,
+class_to_idx : {'Red_Cylindrical_Buoy' : 0,
                 'Green_Cylindrical_Buoy' : 1,
                 'White_Cylindrical_Buoy' : 2,
                 'Blue_Cylindrical_Buoy' : 3,
@@ -17,7 +17,7 @@ class_to_idx = {'Red_Cylindrical_Buoy' : 0,
                 'Dock' : 6,
                 'Background' : 7
                }
-idx_to_class = {0 : 'Red_Cylindrical_Buoy',
+idx_to_class : {0 : 'Red_Cylindrical_Buoy',
                 1 : 'Green_Cylindrical_Buoy',
                 2 : 'White_Cylindrical_Buoy',
                 3 : 'Blue_Cylindrical_Buoy',
