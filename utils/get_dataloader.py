@@ -1,45 +1,43 @@
+import numpy as np
 import torch
-from torchvision import transforms
 from torch.utils.data import DataLoader
+from torchvision import transforms
 
 from dataset import CustomDataset
 
-def get_dataloaders(txt_path, data_dir, input_size, batch_size, shuffle = True):
+
+def yolo_collate_fn(batch_lst):
+    batch_size = len(batch_lst)
+    c, h, w = batch_lst[0][0].shape
+    img_batch = torch.zeros(batch_size, 3, h, w)
+
+    max_num_box = max(len(batch_lst[i][1]) \
+                      for i in range(batch_size))
+
+    box_batch = torch.Tensor(batch_size, max_num_box, 5).fill_(-1.)
+    
+    for i in range(batch_size):
+      img, ann = batch_lst[i]
+      img_batch[i] = img
+      all_bbox = ann
+      for bbox_idx, one_bbox in enumerate(all_bbox):
+        bbox = one_bbox[1:]
+        obj_cls = one_bbox[0]
+        box_batch[i][bbox_idx] = torch.tensor(np.append(bbox, obj_cls))
+    
+    return img_batch, box_batch
+
+def get_dataloader(dataset, batch_size, shuffle = True, num_workers=2):
     '''
     Build dataloaders with transformations. 
 
     Args:
-        input_size: int or tuple, the size of the tranformed images
+        dataset: pytorch dataset object transformed is preferred
         batch_size: int, minibatch size for dataloading
 
     Returns:
         dataloader: pytorch dataloader for corresponding txt file.
     '''
-
-    mean = [0.485, 0.456, 0.406]
-    std = [0.229, 0.224, 0.225]
-
-    # train_path = './data_miniplaces_modified/train/'
-    # test_path = './data_miniplaces_modified/test/'
-    # val_path = './data_miniplaces_modified/val/'
-
-    # ========= Step 1: build transformations for the dataset ===========
-    # I. Resize the image to input_size using transforms.Resize
-    # II. Convert the image to PyTorch tensor using transforms.ToTensor
-    # III. Normalize the images with the mean and std parameters of the dataset using transforms.Normalize.
-
-    data_transform = transforms.Compose([
-                                          transforms.Resize(input_size),
-                                          transforms.ToTensor(),
-                                          transforms.Normalize(mean,std)
-                                        ])
-    
-
-    # ========= Step 2: build dataloaders for the downloaded data ===========
-    # I. Construct pytorch datasets for train/val/test from given txt file path
-    dataset = CustomDataset(txt_path, data_dir, data_transform)
-
-    # II. Use torch.utils.data.DataLoader to build dataloaders with the constructed pytorch datasets.
-    dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=2)
+    dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True, collate_fn=yolo_collate_fn)
     
     return dataloader
