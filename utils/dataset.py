@@ -23,7 +23,7 @@ class CustomDataset(Dataset):
 
         Returns:
             sample(list): list of image and bboxes where,
-                            image = no tranform:PIL image transform: tensor
+                            image = tensor:transform PIL image:no tranform
                             bboxes = np.array [class x y w h]
         """
         # self.landmarks_frame = pd.read_csv(csv_file)

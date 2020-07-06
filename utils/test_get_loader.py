@@ -1,29 +1,36 @@
+import yaml
 import matplotlib.pyplot as plt
 from torchvision import transforms
 
-from dataset import CustomDataset
-from dataset_functions import show_image_with_bboxes
 from dataset_functions import show_image_batch_with_bboxes
 
 from dataset import CustomDataset
-from get_dataloader import get_dataloaders
+from get_dataloader import get_dataloader
 
-train_batched_data = get_dataloaders("/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/train.txt",
-                                    "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/1440_whitebuoy/",
-                                    (400,600), 2, True)
+with open("/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/config/dataset_config.yaml") as file:
+    config = yaml.full_load(file)
 
+# Create Dataset
+transform = transforms.Compose([
+                                transforms.Resize(config['reshape_size']),
+                                transforms.ToTensor(),
+                                transforms.Normalize(config['mean'],
+                                                     config['std'])
+                              ])
 
-for i_batch, sample_batched in enumerate(train_batched_data):
-    print(i_batch, sample_batched['image'].size(),
-          sample_batched['bboxes'].size())
+train_dataset = CustomDataset(config['train'], config['data_dir'], transform)
 
-    # observe 4th batch and stop.
-    if i_batch == 3:
-        break
-    #     plt.figure()
-    #     show_landmarks_batch(sample_batched)
-    #     plt.axis('off')
-    #     plt.ioff()
-    #     plt.show()
+train_dataloader = get_dataloader(train_dataset, 4)
 
-# show_image_batch_with_bboxes(batch_img, batch_bboxes)
+train_loader_iter = iter(train_dataloader)
+img, ann = train_loader_iter.next()
+
+print('img has shape: ', img.shape)
+print('ann has shape: ', ann.shape)
+
+plt.style.use('dark_background')
+plt.figure()
+show_image_batch_with_bboxes(img, ann, config['mean'], config['std'])
+plt.axis('off')
+plt.ioff()
+plt.show()

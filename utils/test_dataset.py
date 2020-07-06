@@ -1,43 +1,29 @@
+import yaml
 import matplotlib.pyplot as plt
 from torchvision import transforms
 
 from dataset import CustomDataset
 from dataset_functions import show_image_with_bboxes
 
-txt = "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/train.txt"
-data = "/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/dataset/labelled/1440_whitebuoy/"
 
-trans = transforms.Compose([
-                            transforms.Resize((320, 224)),
-                            transforms.ToTensor(),
+with open("/home/bhushan/Projects/RobotX/Floating-Buoy-Detection/config/dataset_config.yaml") as file:
+    config = yaml.full_load(file)
+
+# Create Dataset
+transform = transforms.Compose([
+                                transforms.Resize(config['reshape_size']),
+                                transforms.ToTensor(),
+                                transforms.Normalize(config['mean'],
+                                                     config['std'])
                             ])
-train_dataset = CustomDataset(txt, data, trans)
 
-fig = plt.figure()
+train_dataset = CustomDataset(config['train'], config['data_dir'], transform)
 
 sample = train_dataset[1]
-image = sample['image']
-bboxes = sample['bboxes']
+image = sample[0]       # tensor
+bboxes = sample[1]      # np.array
 
-show_image_with_bboxes(image, bboxes)
-
+plt.style.use('dark_background')
+fig = plt.figure()
+show_image_with_bboxes(image, bboxes, config['mean'], config['std'], True)
 plt.show()
-
-# for i in range(len(train_dataset)):
-#     sample = train_dataset[i]
-
-#     print(i, sample['image'].shape, sample['bboxes'].shape)
-
-#     ax = plt.subplot(1, 4, i + 1)
-#     plt.tight_layout()
-#     ax.set_title('Sample #{}'.format(i))
-#     ax.axis('off')
-
-#     image = sample['image']
-#     bboxes = sample['bboxes']
-
-#     show_image_with_bboxes(image, bboxes)
-
-#     if i == 1:
-#         plt.show()
-        # break
